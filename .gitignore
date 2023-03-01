@@ -1,0 +1,12 @@
+# Third party dependencies
+node_modules
+
+# Out directory
+/lib
+
+# Yarn
+.yarn
+
+#coverage
+coverage
+coverage-ts
