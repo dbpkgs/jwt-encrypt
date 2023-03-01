@@ -6,6 +6,7 @@ node_modules
 
 # Yarn
 .yarn
+*.log
 
 #coverage
 coverage

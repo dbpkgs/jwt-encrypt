@@ -1,11 +1,25 @@
 {
-  "name": "jwt-encrypted",
+  "name": "jwt-encrypt",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": false,
+  "description": "A JWT encryption and decryption library for node server and web applications",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "dbpkgs",
+  "engines": {
+    "node": ">=14"
+  },
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./lib && tsc",
-    "start": "ts-node ./index.ts"
+    "build": "yarn lint && rimraf ./lib && tsc",
+    "check:type": "tsc --project tsconfig.json",
+    "check:format": "prettier --check '**/*.{js,md,ts,yaml,yml}'  --ignore-path ./.prettierignore",
+    "format": "prettier --write '**/*.{js,md,ts,yaml,yml,sh}'",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:fix": "eslint \"**/*.ts\" --fix"
   },
   "dependencies": {
     "browserify-aes": "^1.2.0",
@@ -13,8 +27,14 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "jest": "^29.4.3",
     "prettier": "^2.8.4",
     "rimraf": "^4.1.2",
+    "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   }

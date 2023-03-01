@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { createCipheriv, createDecipheriv } from 'browserify-aes';
 import { Buffer } from 'buffer';
@@ -29,7 +30,7 @@ export interface EncryptionOptions {
 }
 
 interface DecryptedResult {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface EncryptedResult {
