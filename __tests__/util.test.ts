@@ -20,6 +20,23 @@ describe('"Cipher"', () => {
       expect(typeof encryptedPayload.data).toBe('string');
       expect(encryptedPayload.data).toBe(expectedEncryptedResponse);
     });
+
+    it('should throw encryption error when encrypting a given payload with wrong algorithm', () => {
+      const payload = 'Test';
+      const options: EncryptionOptions = {
+        // Deliberately force the algorithm to a different algorithm to catch encryption errors
+        //@ts-expect-error (2820): FIXME: Type '"aes-256-ccm"' is not assignable to type 'EncryptionAlgorithm'. Did you mean '"aes-256-cbc"
+        algorithm: 'aes-256-ccm',
+        iv: 'abcd1234abcd1234', // 16-bit string
+        key: 'abcd1234abcd1234efgh5678efgh5678', // 32-bit string
+      };
+
+      const errorMessage = 'Error encrypting string. Please try again';
+
+      expect(() => {
+        Cipher.encrypt(payload, options);
+      }).toThrowError(errorMessage);
+    });
   });
 
   describe('"Cipher.decrypt"', () => {
