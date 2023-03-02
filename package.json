@@ -35,6 +35,7 @@
     "lint:fix": "eslint \"**/*.ts\" --fix",
     "prepare": "yarn build",
     "prepublishOnly": "yarn check:type && yarn lint && yarn test",
+    "preversion": "yarn lint",
     "postversion": "git push && git push --tags",
     "test": "jest --config jestconfig.json",
     "test:coverage": "yarn test --coverage",
