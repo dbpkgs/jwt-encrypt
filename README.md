@@ -1,6 +1,6 @@
 # JWT Encrypt
 
-[![JWT Encrypt Action Status](https://github.com/dbpkgs/jwt-encrypt/workflows/npm-publish/badge.svg)](https://github.com/dbpkgs/jwt-encrypt/actions)
+[![JWT Encrypt Action Status](https://github.com/dbpkgs/jwt-encrypt/workflows/npm-publish/badge.svg?branch=master)](https://github.com/dbpkgs/jwt-encrypt/actions)
 
 A JWT encryption and decryption library for node server and web applications
 
