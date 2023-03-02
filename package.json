@@ -33,8 +33,12 @@
     "format": "prettier --write '**/*.{js,md,ts,yaml,yml,sh}'",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint \"**/*.ts\" --fix",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn check:type && yarn lint && yarn test",
+    "postversion": "git push && git push --tags",
     "test": "jest --config jestconfig.json",
-    "test:coverage": "yarn test --coverage"
+    "test:coverage": "yarn test --coverage",
+    "version": "yarn run format && git add -A src"
   },
   "dependencies": {
     "browserify-aes": "^1.2.0",
