@@ -1,9 +1,11 @@
 {
+  "verbose": true,
   "collectCoverage": true,
   "coverageReporters": ["json", "html"],
   "transform": {
     "^.+\\.ts?$": "ts-jest"
   },
+  "testEnvironment": "jsdom",
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   "moduleFileExtensions": ["ts", "js", "json", "node"]
 }
