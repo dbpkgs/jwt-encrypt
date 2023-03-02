@@ -26,6 +26,16 @@ The encryption algorithms determine the key. The following shows the list algori
 | aes-192-cbc   | 24             | 16            |
 | aes-128-cbc   | 16             | 16            |
 
+### Encryption options
+
+```ts
+{
+  key: string; // a 16-bit, 24-bit, or 32-bit raw string used by the algorithms
+  iv: string; // a 16-bit raw string initialization vector
+  algorithm: 'aes-128-cbc' | 'aes-192-cbc' | 'aes-256-cbc'; // The cypher algorithm to be used to  encrypt the payload
+}
+```
+
 ## Usage
 
 ### Sign Token
@@ -119,16 +129,6 @@ jwte.verify(signedToken, jwtSecret, encryptionOptions, jwtOptions, (err, verifie
 
   console.log('VerifiedToken', verifiedToken);
 });
-```
-
-#### Encryption options
-
-```ts
-{
-  key: string; // a 16-bit, 24-bit, or 32-bit raw string used by the algorithms
-  iv: string; // a 16-bit raw string initialization vector
-  algorithm: 'aes-128-cbc' | 'aes-192-cbc' | 'aes-256-cbc'; // The cypher algorithm to be used to  encrypt the payload
-}
 ```
 
 ## License
