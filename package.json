@@ -1,6 +1,6 @@
 {
   "name": "jwt-encrypt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "A JWT encryption and decryption library for node server and web applications",
   "main": "lib/index.js",
