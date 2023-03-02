@@ -8,10 +8,23 @@
   "files": [
     "lib/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbpkgs/jwt-encrypt"
+  },
+  "bugs": {
+    "url": "https://github.com/dbpkgs/jwt-encrypt/issues"
+  },
   "author": "dbpkgs",
   "engines": {
     "node": ">=14"
   },
+  "keywords": [
+    "jwt-encrypt",
+    "encrypt-jwt",
+    "jwt",
+    "encrypt"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "yarn lint && rimraf ./lib && tsc",
