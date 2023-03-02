@@ -6,7 +6,8 @@ We release patches for security vulnerabilities and bug fixes. Versions currentl
 
 | Version  | Supported          |
 | -------- | ------------------ |
-| >= 1.0.0 | :heavy_check_mark: |
+| >= 1.0.4 | :heavy_check_mark: |
+| < 1.0.3  | :x:                |
 
 ## Reporting a Vulnerability
 
