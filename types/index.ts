@@ -1,3 +1,14 @@
+import {
+  DecodeOptions,
+  SignOptions,
+  Secret,
+  JwtPayload,
+  Jwt,
+  VerifyOptions,
+  VerifyCallback,
+  VerifyErrors,
+} from 'jsonwebtoken';
+
 export type EncryptionAlgorithm = 'aes-128-cbc' | 'aes-192-cbc' | 'aes-256-cbc';
 // TODO: Support the CCM and GCM algorithms
 // | 'aes-128-ccm'
@@ -35,3 +46,5 @@ export interface EncryptedResult {
 export interface EncryptedData {
   data?: string;
 }
+
+export type { DecodeOptions, SignOptions, Secret, JwtPayload, Jwt, VerifyOptions, VerifyCallback, VerifyErrors };

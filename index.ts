@@ -2,7 +2,20 @@ import jwt from 'jsonwebtoken';
 
 import { Cipher } from './utils';
 
-import type { EncryptedData, EncryptionOptions } from './types';
+import type {
+  DecodeOptions,
+  EncryptedData,
+  EncryptionOptions,
+  SignOptions,
+  Secret,
+  Jwt,
+  JwtPayload,
+  VerifyOptions,
+  VerifyCallback,
+  VerifyErrors,
+} from './types';
+
+export * from './types';
 
 /**
  * Encrypt jsonwebtoken (JWT)
@@ -13,22 +26,22 @@ export default class JwtEncrypt {
    * Synchronously sign the given payload into an encrypted JSON Web Token string payload
    *
    * @param {string | object | Buffer} payload - The payload to sign, could be a literal, buffer or string
-   * @param {jwt.Secret} jwtSecretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
+   * @param {Secret} jwtSecretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
    * @param {EncryptionOptions} encryptionOptions  - Options for the encyption
    * @property {string} encryptionOptions.key - a 16-bit, 24-bit, or 32-bit raw string used by the algorithms. The 16-bit string is used on algorithms that include 128. The 24-bit string is used on algorithms that include 192. The 32-bit string is used on algorithms that include 256
    * @property {string} encryptionOptions.iv  - a 16-bit raw string initialization vector (iv)
    * @link https://en.wikipedia.org/wiki/Initialization_vector
    * @property {EncryptionAlgorithm} encryptionOptions.algorithm - The cypher algorithm to be used to  encrypt the payload
-   * @param {jwt.SignOptions | undefined} jwtOptions - Options for the signature
+   * @param {SignOptions | undefined} jwtOptions - Options for the signature
    *
    * @returns {string} - The JSON Web Token string
    *
    */
   static sign(
     payload: string | object | Buffer,
-    jwtSecretOrPrivateKey: jwt.Secret,
+    jwtSecretOrPrivateKey: Secret,
     encryptionOptions: EncryptionOptions,
-    jwtOptions?: jwt.SignOptions | undefined,
+    jwtOptions?: SignOptions | undefined,
   ): string {
     return jwt.sign(Cipher.encrypt(payload, encryptionOptions), jwtSecretOrPrivateKey, jwtOptions);
   }
@@ -42,15 +55,15 @@ export default class JwtEncrypt {
    * @property {string} encryptionOptions.iv  - a 16-bit raw string initialization vector (iv)
    * @link https://en.wikipedia.org/wiki/Initialization_vector
    * @property {EncryptionAlgorithm} encryptionOptions.algorithm - The cypher algorithm to be used to  encrypt the payload
-   * @param {jwt.DecodeOptions | undefined} jwtDecodeOptions - jwt options for decoding a jwt token.
+   * @param {DecodeOptions | undefined} jwtDecodeOptions - jwt options for decoding a jwt token.
    *
-   * @returns {string | jwt.JwtPayload | null} - The decoded Token
+   * @returns {string | JwtPayload | null} - The decoded Token
    */
   static decode(
     token: string,
     encryptionOptions: EncryptionOptions,
-    jwtDecodeOptions?: jwt.DecodeOptions,
-  ): string | jwt.JwtPayload | null {
+    jwtDecodeOptions?: DecodeOptions,
+  ): string | JwtPayload | null {
     const decodedPayload = jwt.decode(token, jwtDecodeOptions);
 
     if (!decodedPayload || typeof decodedPayload === 'string') return null;
@@ -77,31 +90,31 @@ export default class JwtEncrypt {
    * Synchronously verify given token with encrypted data using a secret or a public key to get a decoded token
    *
    * @param {string} token - JWT string to verify
-   * @param {jwt.Secret} jwtSecretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded public key for RSA and ECDSA.
+   * @param {Secret} jwtSecretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded public key for RSA and ECDSA.
    * @param {EncryptionOptions} encryptionOptions  - Options for the encyption
    * @property {string} encryptionOptions.key -  a 16-bit, 24-bit, or 32-bit raw string used by the algorithms. The 16-bit string is used on algorithms that include 128. The 24-bit string is used on algorithms that include 192. The 32-bit string is used on algorithms that include 256
    * @property {string} encryptionOptions.iv  - a 16-bit raw string initialization vector (iv)
    * @link https://en.wikipedia.org/wiki/Initialization_vector
    * @property {EncryptionAlgorithm} encryptionOptions.algorithm - The cypher algorithm to be used to  encrypt the payload
-   * @param {jwt.VerifyOptions } jwtVerifyOptions - Options for the verification
-   * @param {jwt.VerifyCallback<string | jwt.JwtPayload | jwt.Jwt>} callback - A function which receives an error and verifiedPayload, can be used to perfom an action once the payload has been verified
+   * @param {VerifyOptions } jwtVerifyOptions - Options for the verification
+   * @param {VerifyCallback<string | JwtPayload | Jwt>} callback - A function which receives an error and verifiedPayload, can be used to perfom an action once the payload has been verified
    *
    * @returns {void}
    *
    */
   static verify(
     token: string,
-    jwtSecretOrPrivateKey: jwt.Secret,
+    jwtSecretOrPrivateKey: Secret,
     encryptionOptions: EncryptionOptions,
-    jwtVerifyOptions?: jwt.VerifyOptions,
-    callback?: jwt.VerifyCallback<string | jwt.JwtPayload | jwt.Jwt>,
+    jwtVerifyOptions?: VerifyOptions,
+    callback?: VerifyCallback<string | JwtPayload | Jwt>,
   ): void {
-    let done: jwt.VerifyCallback<string | jwt.JwtPayload | jwt.Jwt>;
+    let done: VerifyCallback<string | JwtPayload | Jwt>;
 
     if (callback) {
       done = callback;
     } else {
-      done = function (err: jwt.VerifyErrors | null, data: string | jwt.JwtPayload | jwt.Jwt | undefined) {
+      done = function (err: VerifyErrors | null, data: string | JwtPayload | Jwt | undefined) {
         if (err) throw err;
 
         return data;
@@ -112,7 +125,7 @@ export default class JwtEncrypt {
       token,
       jwtSecretOrPrivateKey,
       jwtVerifyOptions,
-      (err: jwt.VerifyErrors | null, verifiedPayload?: string | jwt.JwtPayload | (jwt.Jwt & EncryptedData)) => {
+      (err: VerifyErrors | null, verifiedPayload?: string | JwtPayload | (Jwt & EncryptedData)) => {
         if (err) {
           return done(err, undefined);
         }
