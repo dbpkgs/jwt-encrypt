@@ -19,13 +19,16 @@
     "check:format": "prettier --check '**/*.{js,md,ts,yaml,yml}'  --ignore-path ./.prettierignore",
     "format": "prettier --write '**/*.{js,md,ts,yaml,yml,sh}'",
     "lint": "eslint \"**/*.ts\"",
-    "lint:fix": "eslint \"**/*.ts\" --fix"
+    "lint:fix": "eslint \"**/*.ts\" --fix",
+    "test": "jest --config jestconfig.json",
+    "test:coverage": "yarn test --coverage"
   },
   "dependencies": {
     "browserify-aes": "^1.2.0",
     "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.4.0",
     "@types/jsonwebtoken": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
