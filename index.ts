@@ -2,11 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import { Cipher } from './utils';
 
-import type { EncryptionOptions } from './utils';
-
-interface EncryptedData {
-  data?: string;
-}
+import type { EncryptedData, EncryptionOptions } from './types';
 
 /**
  * Encrypt jsonwebtoken (JWT)

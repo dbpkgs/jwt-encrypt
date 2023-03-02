@@ -1,6 +1,6 @@
 import { Cipher } from '../utils';
 
-import type { EncryptionOptions } from '../utils';
+import type { EncryptionOptions } from '../types';
 
 describe('"Cipher"', () => {
   describe('"Cipher.encrypt"', () => {

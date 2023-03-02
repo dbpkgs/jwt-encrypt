@@ -1,6 +1,6 @@
 import jwte from '../index';
 
-import type { EncryptionOptions } from '../utils';
+import type { EncryptionOptions } from '../types';
 
 describe('"sign" - signing a token asynchronously', () => {
   describe('"sign" jwt token success', () => {

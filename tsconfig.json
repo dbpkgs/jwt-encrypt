@@ -16,6 +16,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["browserify-aes.d.ts", "index.ts"],
+  "include": ["index.ts"],
   "exclude": ["node_modules", "*/__tests__/*", "**/*.test.ts"]
 }

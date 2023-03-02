@@ -1,5 +1,6 @@
 # CHANGELOG
 
-## 1.0.0 (Mar 2, 2023)
+## 1.0.3 (Mar 2, 2023)
 
+- Bug fixes and testing
 - Initial public release
