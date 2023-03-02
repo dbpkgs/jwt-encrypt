@@ -34,11 +34,7 @@ export default class JwtEncrypt {
     encryptionOptions: EncryptionOptions,
     jwtOptions?: jwt.SignOptions | undefined,
   ): string {
-    return jwt.sign(
-      Cipher.encrypt(payload, encryptionOptions),
-      jwtSecretOrPrivateKey,
-      jwtOptions,
-    );
+    return jwt.sign(Cipher.encrypt(payload, encryptionOptions), jwtSecretOrPrivateKey, jwtOptions);
   }
 
   /**
@@ -109,10 +105,7 @@ export default class JwtEncrypt {
     if (callback) {
       done = callback;
     } else {
-      done = function (
-        err: jwt.VerifyErrors | null,
-        data: string | jwt.JwtPayload | jwt.Jwt | undefined,
-      ) {
+      done = function (err: jwt.VerifyErrors | null, data: string | jwt.JwtPayload | jwt.Jwt | undefined) {
         if (err) throw err;
 
         return data;
@@ -123,10 +116,7 @@ export default class JwtEncrypt {
       token,
       jwtSecretOrPrivateKey,
       jwtVerifyOptions,
-      (
-        err: jwt.VerifyErrors | null,
-        verifiedPayload?: string | jwt.JwtPayload | (jwt.Jwt & EncryptedData),
-      ) => {
+      (err: jwt.VerifyErrors | null, verifiedPayload?: string | jwt.JwtPayload | (jwt.Jwt & EncryptedData)) => {
         if (err) {
           return done(err, undefined);
         }

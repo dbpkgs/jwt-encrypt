@@ -48,21 +48,15 @@ export class Cipher {
     }
 
     if (options.algorithm.includes('256') && options.key.length !== 32) {
-      throw new Error(
-        `Encryption key must be a 32-bit string. Received ${options.key.length}-bit string`,
-      );
+      throw new Error(`Encryption key must be a 32-bit string. Received ${options.key.length}-bit string`);
     }
 
     if (options.algorithm.includes('192') && options.key.length !== 24) {
-      throw new Error(
-        `Encryption key must be a 24-bit string. Received ${options.key.length}-bit string`,
-      );
+      throw new Error(`Encryption key must be a 24-bit string. Received ${options.key.length}-bit string`);
     }
 
     if (options.algorithm.includes('128') && options.key.length !== 16) {
-      throw new Error(
-        `Encryption key must be a 16-bit string. Received ${options.key.length}-bit string`,
-      );
+      throw new Error(`Encryption key must be a 16-bit string. Received ${options.key.length}-bit string`);
     }
 
     if (options.iv.length !== 16) {
@@ -85,10 +79,7 @@ export class Cipher {
    * @return {EncryptedResult}  encrypted result
    *
    */
-  static encrypt(
-    payload: string | object | Buffer,
-    options: EncryptionOptions,
-  ): EncryptedResult {
+  static encrypt(payload: string | object | Buffer, options: EncryptionOptions): EncryptedResult {
     Cipher.validateEncryptionOptions(options);
 
     try {
@@ -103,10 +94,7 @@ export class Cipher {
       const encryptedCipher = cipher.update(JSON.stringify(payload), 'utf-8');
 
       // Returning the iv vector along with the encrypted data
-      const encryptedData = Buffer.concat([
-        encryptedCipher,
-        cipher.final(),
-      ]).toString('hex');
+      const encryptedData = Buffer.concat([encryptedCipher, cipher.final()]).toString('hex');
 
       return { data: encryptedData };
     } catch (err) {
@@ -127,10 +115,7 @@ export class Cipher {
    * @return {string | DecryptedResult}  encrypted result
    *
    */
-  static decrypt(
-    text: string,
-    options: EncryptionOptions,
-  ): string | DecryptedResult {
+  static decrypt(text: string, options: EncryptionOptions): string | DecryptedResult {
     Cipher.validateEncryptionOptions(options);
 
     try {
@@ -147,10 +132,7 @@ export class Cipher {
       const decryptedCipher = decipher.update(encryptedText);
 
       // returning response data after decryption
-      const decryptedData = Buffer.concat([
-        decryptedCipher,
-        decipher.final(),
-      ]).toString();
+      const decryptedData = Buffer.concat([decryptedCipher, decipher.final()]).toString();
 
       return JSON.parse(decryptedData);
     } catch (err) {
